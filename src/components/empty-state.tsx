@@ -1,11 +1,11 @@
 /**
- * Shared, feature-agnostic UI. (components/ui/ is reserved for the generated
- * gluestack primitives and is never hand-edited — invariant 8.)
+ * Shared, feature-agnostic UI. (components/ui/ is reserved for the baked
+ * primitives and is never hand-edited — invariant 8.)
  */
 import type { LucideIcon } from "lucide-react-native";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 
-import { tokens } from "@/core/theme";
+import { Text } from "@/components/ui/text";
 
 export function EmptyState({
   icon: Icon,
@@ -15,19 +15,9 @@ export function EmptyState({
   title: string;
 }) {
   return (
-    <View style={styles.container}>
-      <Icon size={32} color={tokens.color.textMuted} />
-      <Text style={styles.title}>{title}</Text>
+    <View className="flex-1 items-center justify-center gap-2">
+      <Icon size={32} color="rgb(140 140 150)" />
+      <Text variant="muted">{title}</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flex: 1,
-    gap: tokens.space.sm,
-    justifyContent: "center",
-  },
-  title: { color: tokens.color.textMuted, fontSize: tokens.fontSize.md },
-});

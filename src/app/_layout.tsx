@@ -4,6 +4,11 @@
  * AppState/auto-refresh wiring lives in lib/supabase.ts, next to the client
  * it concerns.
  */
+// Must be imported before anything that renders: NativeWind resolves the
+// Tailwind layers at module-eval time, and a later import means the first
+// paint is unstyled.
+import "@/global.css";
+
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
