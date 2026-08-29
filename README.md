@@ -49,3 +49,17 @@ truth, and release gating refuses to ship a binary still carrying placeholders.
 npx tsc --noEmit               # types
 npx expo export --platform web # bundles client + API routes
 ```
+
+## For the generator (not for humans)
+
+`app.json` carries `extra.eas.projectId`, which links **this template** to its
+own EAS project so the template itself can be built and deployed in CI.
+
+A generated app MUST NOT inherit it. `eas init` writes a project-scoped id, and
+two apps sharing one id share builds, credentials and deployments. The Mobile
+Builder runs `eas init` for each generated project and overwrites this value
+before the first build.
+
+Note also that `eas.json` pins `cli.version` to `>= 23.0.0`. That constraint is
+load-bearing: an older global `eas-cli` fails the command outright rather than
+building something subtly different.
