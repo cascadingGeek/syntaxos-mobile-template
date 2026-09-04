@@ -63,3 +63,16 @@ before the first build.
 Note also that `eas.json` pins `cli.version` to `>= 23.0.0`. That constraint is
 load-bearing: an older global `eas-cli` fails the command outright rather than
 building something subtly different.
+
+## Export compliance — re-derive this per app
+
+`ios.infoPlist.ITSAppUsesNonExemptEncryption` is set to `false` here so builds
+do not stall: left unset, EAS warns and App Store Connect blocks TestFlight
+until someone answers it by hand.
+
+**That value is a legal declaration and the app owner is responsible for it.**
+It must be re-derived per generated app, not inherited. Note that this starter
+itself ships `aes-js` (LargeSecureStore encrypts the Supabase session before it
+reaches AsyncStorage), so "does this app use non-exempt encryption" is a real
+question here, not a formality. Release Compliance confirms it with the owner
+before submission rather than assuming the template's answer.
