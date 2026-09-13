@@ -41,7 +41,7 @@ src/
 ├── schemas/                  Zod (zod/mini) — the single source of validation, shared client + server.
 │
 ├── core/                     Cross-cutting primitives. DEPENDS ON NOTHING in the app.
-│                             config/env (fails fast, names what's missing), app-error, reporting, theme tokens.
+│                             config/env (fails fast, names what's missing), app-error, reporting. Colour tokens live ONLY in global.css.
 │
 ├── utils/                    Pure functions (dates, Result<T>, filters). No side effects.
 │

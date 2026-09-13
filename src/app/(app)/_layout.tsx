@@ -4,26 +4,15 @@
  * to remember.
  */
 import { Redirect, Stack } from "expo-router";
-import { ActivityIndicator, View } from "react-native";
 
-import { tokens } from "@/core/theme";
+import { LoadingState } from "@/components/loading-state";
 import { useSession } from "@/hooks/use-session";
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
 
   if (isLoading) {
-    return (
-      <View
-        style={{
-          backgroundColor: tokens.color.background,
-          flex: 1,
-          justifyContent: "center",
-        }}
-      >
-        <ActivityIndicator />
-      </View>
-    );
+    return <LoadingState />;
   }
 
   if (!session) {

@@ -7,9 +7,8 @@
  */
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
 
-import { tokens } from "@/core/theme";
+import { LoadingState } from "@/components/loading-state";
 import { setSessionFromTokens } from "@/data/auth";
 
 export default function AuthCallbackScreen() {
@@ -31,16 +30,5 @@ export default function AuthCallbackScreen() {
       .catch(() => router.replace("/login"));
   }, [params, router]);
 
-  return (
-    <View
-      style={{
-        alignItems: "center",
-        backgroundColor: tokens.color.background,
-        flex: 1,
-        justifyContent: "center",
-      }}
-    >
-      <ActivityIndicator />
-    </View>
-  );
+  return <LoadingState label="Signing you in…" />;
 }
