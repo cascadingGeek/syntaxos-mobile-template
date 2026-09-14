@@ -9,9 +9,9 @@
  */
 import * as z from "zod/mini";
 
-export const CreateNoteInput = z.object({
+export const CreateNoteSchema = z.object({
   title: z.string().check(z.minLength(1), z.maxLength(200)),
   body: z.string().check(z.maxLength(10_000)),
 });
 
-export type CreateNoteInput = z.infer<typeof CreateNoteInput>;
+export type CreateNoteInput = z.infer<typeof CreateNoteSchema>;

@@ -25,6 +25,7 @@ Versions are pinned **here**, never named in a generation prompt.
 | Server state | `@tanstack/react-query` |
 | Client state | `zustand` |
 | Validation | `zod/mini` |
+| Forms | `react-hook-form` + `@hookform/resolvers` |
 | Lists | `@shopify/flash-list` |
 | Icons | `lucide-react-native` + `react-native-svg` |
 | Images | `expo-image` |
@@ -52,13 +53,11 @@ npx expo export --platform web # bundles client + API routes
 
 ## For the generator (not for humans)
 
-`app.json` carries `extra.eas.projectId`, which links **this template** to its
-own EAS project so the template itself can be built and deployed in CI.
-
-A generated app MUST NOT inherit it. `eas init` writes a project-scoped id, and
-two apps sharing one id share builds, credentials and deployments. The Mobile
-Builder runs `eas init` for each generated project and overwrites this value
-before the first build.
+`app.json` deliberately carries neither an Expo owner nor
+`extra.eas.projectId`. `eas init` writes a project-scoped identity during the
+authenticated release stage. Two generated apps must never share one EAS
+project because they would also share builds, credentials, updates, and
+deployments.
 
 Note also that `eas.json` pins `cli.version` to `>= 23.0.0`. That constraint is
 load-bearing: an older global `eas-cli` fails the command outright rather than

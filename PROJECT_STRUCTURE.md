@@ -30,7 +30,7 @@ src/
 │   └── <feature>/            e.g. todos/components, notifications/{content,plan,scheduler,...}
 │
 ├── components/               Shared, feature-agnostic UI.
-│   └── ui/                   gluestack-ui generated — baked once at template build. DO NOT hand-edit.
+│   └── ui/                   Typed NativeWind primitives baked into the template.
 │
 ├── lib/                      Platform and client wiring: supabase client, query-client,
 │                             query-keys, cache patching, online-manager, fetch-with-timeout,
@@ -59,7 +59,10 @@ src/
 5. **`store/` holds client state only.** Server data lives in the TanStack Query cache and is never mirrored into Zustand.
 6. **`schemas/` is the single validation source**, shared by client and `+api.ts` (the server validates with the same schema the client does).
 7. **`core/` depends on nothing** in the app; anything may depend on `core/`. No dependency cycles.
-8. **`components/ui/` is generated (gluestack) and never hand-edited.** It is produced once at template-build time.
+8. **`components/ui/` is the baked primitive contract.** Generated apps consume
+   these stable typed components instead of recreating them inside routes. Change
+   them only in this canonical template, with typecheck, lint, Doctor, and bundle
+   verification; downstream generation must not rewrite them.
 9. **`types/database.ts` is generated** from the Supabase schema and never hand-edited.
 10. **Reads are query hooks; writes are mutation hooks** — all in `hooks/`, layered over `data/`. Platform-specific code uses `.native.ts` / `.web.ts` splits.
 

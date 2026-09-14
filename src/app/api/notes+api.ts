@@ -10,7 +10,7 @@
  * module variable is either lost or leaked across users.
  */
 import { isAppError } from "@/core/app-error";
-import { CreateNoteInput } from "@/schemas/note";
+import { CreateNoteSchema } from "@/schemas/note";
 import { createNote, resolveUserId } from "@/server/notes";
 
 export async function POST(request: Request): Promise<Response> {
@@ -26,7 +26,7 @@ export async function POST(request: Request): Promise<Response> {
     return Response.json({ error: "Body must be JSON" }, { status: 400 });
   }
 
-  const parsed = CreateNoteInput.safeParse(payload);
+  const parsed = CreateNoteSchema.safeParse(payload);
   if (!parsed.success) {
     return Response.json(
       { error: "Invalid body", issues: parsed.error.issues },
