@@ -16,5 +16,6 @@ export * from "./search-field";
 export * from "./segmented-control";
 export * from "./separator";
 export * from "./skeleton";
+export * from "./state-view";
 export * from "./switch-row";
 export * from "./text";
