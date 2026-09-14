@@ -11,14 +11,13 @@
  * the 256-bit key lives in SecureStore (Keychain / Keystore, well under the
  * cap). This is the pattern Supabase documents for Expo.
  */
-import "react-native-get-random-values";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as aesjs from "aes-js";
+import * as Crypto from "expo-crypto";
 import * as SecureStore from "expo-secure-store";
 
 async function encrypt(key: string, value: string): Promise<string> {
-  const encryptionKey = crypto.getRandomValues(new Uint8Array(256 / 8));
+  const encryptionKey = Crypto.getRandomValues(new Uint8Array(256 / 8));
   const cipher = new aesjs.ModeOfOperation.ctr(
     encryptionKey,
     new aesjs.Counter(1),
