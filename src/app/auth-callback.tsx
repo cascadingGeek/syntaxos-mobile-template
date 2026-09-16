@@ -9,6 +9,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect } from "react";
 
 import { LoadingState } from "@/components/loading-state";
+import { Screen } from "@/components/ui/screen";
 import { setSessionFromTokens } from "@/data/auth";
 
 export default function AuthCallbackScreen() {
@@ -30,5 +31,13 @@ export default function AuthCallbackScreen() {
       .catch(() => router.replace("/login"));
   }, [params, router]);
 
-  return <LoadingState label="Signing you in…" />;
+  // Wrapped, like every other route: `Screen` applies the safe-area insets,
+  // and a bare root paints under the status bar and the camera cutout. This
+  // is the only route in the template that was missing it, so it failed the
+  // safe-area gate on every app the platform generated.
+  return (
+    <Screen>
+      <LoadingState label="Signing you in…" />
+    </Screen>
+  );
 }
