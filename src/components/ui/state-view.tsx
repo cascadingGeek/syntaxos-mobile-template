@@ -28,7 +28,10 @@ function StateView({
 }: StateViewProps) {
   return (
     <View
-      className={cn("flex-1 items-center justify-center gap-3 px-6 py-10", className)}
+      className={cn(
+        "flex-1 items-center justify-center gap-3 px-6 py-10",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -49,7 +52,7 @@ function StateView({
   );
 }
 
-export type LoadingStateProps = Omit<StateViewProps, "children"> & {
+export type LoadingStateProps = Omit<StateViewProps, "children" | "title"> & {
   title?: string;
 };
 
